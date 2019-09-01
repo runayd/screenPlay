@@ -1,0 +1,25 @@
+
+
+<div *ngIf="collapse">
+    
+
+    <h5>I am working on a project were  a writer can easily write script keeping the track of all the elements in their story</h5>
+
+<h2>So at present learning and working on the whole design</h2>
+
+<p>Name:{{userObj.name}}</p>
+<p>From:{{userObj.add}}</p>
+    <p>Contact:{{userObj.phone}}</p>
+
+</div>
+<div>
+    <button (click)=collapseIt()>   
+            <div *ngIf="collapse;then content else other_content">here is ignored</div>    
+                <ng-template #content>Less Info</ng-template>
+                <ng-template #other_content>More Info</ng-template>
+    </button>
+    
+</div>
+<div class="bottom"><p>{{date}}</p></div>
+
+

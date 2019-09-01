@@ -1,0 +1,13 @@
+h2{color: rgb(235, 91, 8);
+text-align: center;}
+h5{color: red;
+    text-align: center;}
+.app-server{margin-left: 1cm}
+p,div{
+    text-align: center;
+    border-bottom: 0ch;
+    border-top: 0ch;
+}
+.bottom{
+    text-align-last: bottom;
+}
