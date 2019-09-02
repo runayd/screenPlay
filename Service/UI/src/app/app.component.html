@@ -2,8 +2,9 @@
 <p>ignore the styling for time being ;)</p>
 
 <app-server [userObj]="user"></app-server>
-
-
-
-
-     
+<div>
+       Address: <input type="text" [(ngModel)]="inputText">
+        <button (click)="getPayment()"> click here for response</button>
+            {{response?.name}}
+</div>
+<router-outlet></router-outlet>

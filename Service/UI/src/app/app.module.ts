@@ -6,14 +6,16 @@ import {FormsModule} from '@angular/forms';
 import { ServerComponent } from './servers/server.component';
 import { SubServerComponent } from './servers/sub-server/sub-server.component';
 import {HttpClientModule} from '@angular/common/http';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, ServerComponent, SubServerComponent
+    AppComponent, ServerComponent, SubServerComponent, PageNotFoundComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,          //FormsModule is used for two-way binding
     HttpClientModule       //HttpClientModule is used for REST Api  

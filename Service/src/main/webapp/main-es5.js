@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Welcome!</h1>\n<p>ignore the styling for time being ;)</p>\n\n<app-server [userObj]=\"user\"></app-server>\n\n\n\n\n     \n"
+module.exports = "<h1>Welcome!</h1>\n<p>ignore the styling for time being ;)</p>\n\n<app-server [userObj]=\"user\"></app-server>\n<div>\n       Address: <input type=\"text\" [(ngModel)]=\"inputText\">\n        <button (click)=\"getPayment()\"> click here for response</button>\n            {{response?.name}}\n</div>\n     \n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<h1>Welcome!</h1>\n<p>ignore the styling for time being ;)</p>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div *ngIf=\"collapse\">\r\n    \r\n\r\n    <h5>I am working on a project were  a writer can easily write script keeping the track of all the elements in their story</h5>\r\n\r\n<h2>So at present learning and working on the whole design</h2>\r\n\r\n<p>Name:{{userObj.name}}</p>\r\n<p>From:{{userObj.add}}</p>\r\n    <p>Contact:{{userObj.phone}}</p>\r\n\r\n</div>\r\n<div>\r\n    <button (click)=collapseIt()>   \r\n            <div *ngIf=\"collapse;then content else other_content\">here is ignored</div>    \r\n                <ng-template #content>Less Info</ng-template>\r\n                <ng-template #other_content>More Info</ng-template>\r\n    </button>\r\n    \r\n</div>\r\n<div class=\"bottom\"><p>{{date}}</p></div>\r\n\r\n\r\n"
+module.exports = "\r\n\r\n<div *ngIf=\"collapse\">\r\n    \r\n\r\n    <h5>I am working on a project were  a writer can easily write script keeping the track of all the elements in their story all along</h5>\r\n\r\n<h2>So at present learning and working on the whole design</h2>\r\n\r\n<p>Name:{{userObj.name}}</p>\r\n<p>From:{{userObj.add}}</p>\r\n    <p>Contact:{{userObj.phone}}</p>\r\n\r\n</div>\r\n<div>\r\n    <button *ngIf=\"!collapse\" (click)=collapseIt()>More Info</button>\r\n    <button *ngIf=\"collapse\" (click)=collapseIt()>Less Info</button>\r\n    \r\n</div>\r\n<div class=\"bottom\"><p>{{date}}</p></div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -80,33 +80,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _servers_user_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./servers/user.model */ "./src/app/servers/user.model.ts");
+/* harmony import */ var _test_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test.service */ "./src/app/test.service.ts");
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(http) {
+    function AppComponent(http, test) {
         var _this = this;
         this.http = http;
-        this.patientid = 1234;
-        this.url = "http://localhost:8091/pay?patientid=" + this.patientid;
+        this.test = test;
+        this.response = null;
         this.ServerName = null;
         this.ServerPID = 11;
         this.ServerStatus = 'offline';
         this.statusFlag = false;
         this.buttonState = true;
-        this.user = new _servers_user_model__WEBPACK_IMPORTED_MODULE_3__["User"]();
         setTimeout(function () { _this.buttonState = false; }, 2000);
-        this.user.name = "Runay Ramdas Dhaygude";
-        this.user.add = "satara, Maharashtra";
-        this.user.phone = "runaydhaygude97@gmail.com";
     }
     AppComponent.prototype.getPayment = function () {
-        this.http.get("" + this.url);
+        this.response = this.test.getResponse(this.inputText);
     };
+    AppComponent.prototype.ngonInit = function () { };
     AppComponent.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+        { type: _test_service__WEBPACK_IMPORTED_MODULE_3__["TestService"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -289,6 +287,49 @@ var User = /** @class */ (function () {
     function User() {
     }
     return User;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/test.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/test.service.ts ***!
+  \*********************************/
+/*! exports provided: TestService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestService", function() { return TestService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var TestService = /** @class */ (function () {
+    function TestService(http) {
+        this.http = http;
+    }
+    TestService.prototype.getResponse = function (api) {
+        var _this = this;
+        this.http.get(this.getBaseUrl() + api).subscribe(function (response) { _this.response = response; });
+        return this.response;
+    };
+    TestService.prototype.getBaseUrl = function () {
+        return 'http://localhost:9000/writenow/';
+    };
+    TestService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    ]; };
+    TestService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], TestService);
+    return TestService;
 }());
 
 
