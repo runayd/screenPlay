@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 
 const routes: Routes = [
-  {path:'**',component:PageNotFoundComponent}
+  {path:'test',component:PageNotFoundComponent}
 ];   //array of objects(routes), it configures routes.
 
 @NgModule({
