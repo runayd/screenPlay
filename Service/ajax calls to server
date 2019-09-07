@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:https="http://www.springframework.org/schema/mvc">
+<head th:include="layout :: head(title=~{::title},links=~{})">
+    <title>Please Login</title>
+
+    <style>
+        .details{padding-top:10px;
+        padding-bottom:10px;
+        padding-left:100px;
+        margin-top:10px;
+        margin-bottom:10px;
+        margin-left:100px;
+        }
+        .comp{padding-top:100px;
+        padding-bottom:10px;
+        margin-top:100px;
+        margin-bottom:10px;
+        }
+        span.a{
+        display: inline;
+        width: 25px;
+        margin-right:29px
+        }
+
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+var username;
+	$.get('/DashPay/getId', function(data) {
+		var json = JSON.parse(data);
+		username=json.id;
+            console.log(username);
+            document.getElementById("username").value=username;
+	});
+  </script>
+</head>
+<body th:include="layout :: body" th:with="content=~{::content}">
+<div class="comp" th:fragment="content">
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+            <legend>Please Enter Following Details for Verification</legend>
+            <div class="details">
+                <input autocomplete='off' type="hidden"
+                       name="username" id="username" value="" maxlength='50' size="25">
+            </div>
+            <div class="details" style="margin-bottom:100px">
+                <span class="a"><label for="password">Date Of Birth:</label></span>
+                <span class="a"><input autocomplete='off' type="password" id="password" name="password"/></span>
+            </div>
+            <div class="form-actions" style="margin-left:270px;,padding-left:320px;">
+                <button type="submit" class="btn">Verify</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
